@@ -1,0 +1,32 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+a{
+    text-decoration: none;
+    font: inherit;
+    color: #FFF;
+}
+
+ul{
+    list-style-type: none;
+}
+
+@media (max-width: 1024px) {
+    html {
+      font-size: 14px; /* Smaller font size for small screens */
+    }
+}
+
+@media (max-width: 425px) {
+    html {
+      font-size: 12px; /* Smaller font size for small screens */
+    }
+}
+
+@media (min-width: 2000px) {
+    html {
+      font-size: 32px; /* Smaller font size for small screens */
+    }
+}
