@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/styles.css">
+    <title>Lab_3</title>
+</head>
+<body>
+    <section class="search_and_sort">
+        <div class="search_container">
+            <input type="text" id="search">
+            <button onclick="searchTrees()">Search</button>
+            <button onclick="clearSearch()">Clear</button>
+        </div>
+        <div class="sorting_container">
+            <label for="sort-select">Choose a sorting type:</label>
+
+            <select id="sort-select" onchange="sortTrees()">
+                <option value="">--Please choose an option--</option>
+                <option value="price_asc">By price ascending</option>
+                <option value="price_desc">By price descending</option>
+                <option value="manufacturer">By manufacturer</option>
+                <option value="height">By height</option>
+                <option value="material">By material</option>
+            </select>
+        </div>
+    </section>
+
+    <section class="cards">
+        <ul id="cards_list">
+        </ul>
+    </section>
+
+    <section>
+        <p id="totalPrice"></p>
+    </section>
+    <script type="module" src="script.js"></script>
+</body>
+</html>
