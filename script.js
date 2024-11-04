@@ -159,8 +159,7 @@ function submitEdit(){
         }
     });
 
-
-    if (!isNewManufacturer & editFormManufacturer.value.toLowerCase() == currentTrees[editTreeIndex].manufacturer) {
+    if (!isNewManufacturer & editFormManufacturer.value.toLowerCase() != currentTrees[editTreeIndex].manufacturer.toLowerCase()) {
         alert("There is already this manufacturer!");
         return
     }
