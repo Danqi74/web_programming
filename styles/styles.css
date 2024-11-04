@@ -14,3 +14,23 @@
     padding: 10px;
     width: 200px;
 }
+
+#modal_edit{
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 1;
+    right: 35vw;
+    top: 30vh;
+    background-color: antiquewhite;
+    border-radius: 10px;
+    width: 30vw;
+    height: 30vw;
+}
+
+.edit_form{
+    margin-bottom: 10px;
+    width: 20vw;
+}

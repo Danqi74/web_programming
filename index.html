@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/styles.css">
-    <title>Lab_3</title>
+    <title>Lab_4</title>
 </head>
 <body>
     <section class="search_and_sort">
         <div class="search_container">
-            <input type="text" id="search">
+            <input type="text" id="search" placeholder="Manufacturer">
             <button onclick="searchTrees()">Search</button>
             <button onclick="clearSearch()">Clear</button>
         </div>
@@ -30,11 +30,28 @@
     <section class="cards">
         <ul id="cards_list">
         </ul>
+        <p id="totalPrice"></p>
     </section>
 
     <section>
-        <p id="totalPrice"></p>
+        <div class="add_tree">
+            <h2>Adding Form</h2>
+            <input type="text" id="add_manufacturer" class="add_form" placeholder="Manufacturer">
+            <input type="number" id="add_price" class="add_form" placeholder="Price">
+            <input type="number" id="add_height" class="add_form" placeholder="Height">
+            <input type="text" id="add_material" class="add_form" placeholder="Material">
+            <button onclick="submitAdd()">Submit</button>
+        </div>
     </section>
+
+    <div id="modal_edit">
+        <h2>Edit Form</h2>
+        <input type="text" id="edit_manufacturer" class="edit_form" placeholder="Manufacturer">
+        <input type="number" id="edit_price" class="edit_form" placeholder="Price">
+        <input type="number" id="edit_height" class="edit_form" placeholder="Height">
+        <input type="text" id="edit_material" class="edit_form" placeholder="Material">
+        <button onclick="submitEdit()">Submit</button>
+    </div>
     <script type="module" src="script.js"></script>
 </body>
 </html>
