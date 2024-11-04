@@ -30,6 +30,15 @@
     height: 30vw;
 }
 
+.close_btn{
+    position: fixed;
+    font-size: 30px;
+    margin: 0;
+    padding: 10px;
+    top: 32vh;
+    left: 61vw;
+}
+
 .edit_form{
     margin-bottom: 10px;
     width: 20vw;

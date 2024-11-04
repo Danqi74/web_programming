@@ -210,5 +210,6 @@ window.sortTrees = sortTrees;
 window.submitEdit = submitEdit;
 window.submitAdd = submitAdd;
 window.openEditModal = openEditModal;
+window.closeEditModal = closeEditModal;
 window.searchTrees = searchTrees;
 window.clearSearch = clearSearch;
