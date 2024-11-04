@@ -151,7 +151,21 @@ function submitEdit(){
     const editFormHeight = document.getElementById('edit_height');
     const editFormMaterial = document.getElementById('edit_material');
 
-    if (editFormManufacturer.value == "" || parseInt(editFormPrice.value, 10) == NaN || parseInt(editFormHeight.value, 10) == NaN || editFormMaterial.value == ""){
+    let isNewManufacturer = true;
+
+    currentTrees.forEach(tree => {
+        if (tree.manufacturer.toLowerCase() === editFormManufacturer.value.toLowerCase()) {
+            isNewManufacturer = false;
+        }
+    });
+
+
+    if (!isNewManufacturer & editFormManufacturer.value.toLowerCase() == currentTrees[editTreeIndex].manufacturer) {
+        alert("There is already this manufacturer!");
+        return
+    }
+
+    if (editFormManufacturer.value == "" || parseInt(editFormPrice.value, 10) == NaN || parseInt(editFormHeight.value, 10) == NaN || editFormMaterial.value == "" || parseInt(editFormPrice.value, 10) < 0 || parseInt(editFormHeight.value, 10) < 1){
         alert("Check your input data, something missed!");
         return
     }
@@ -192,7 +206,22 @@ function submitAdd(){
         material: addMaterialForm.value
     }
 
-    if (newTree.manufacturer == "" || newTree.price == NaN || newTree.height == NaN || newTree.material == ""){
+    
+    let isNewManufacturer = true;
+
+    currentTrees.forEach(tree => {
+        if (tree.manufacturer.toLowerCase() === newTree.manufacturer.toLowerCase()) {
+            isNewManufacturer = false;
+        }
+    });
+
+
+    if (!isNewManufacturer) {
+        alert("There is already this manufacturer!");
+        return
+    }
+
+    if (newTree.manufacturer == "" || newTree.price == NaN || newTree.height == NaN || newTree.material == "" || newTree.price < 0 || newTree.height < 1){
         alert("Check your input data, something missed!");
         return
     }
@@ -213,3 +242,16 @@ window.openEditModal = openEditModal;
 window.closeEditModal = closeEditModal;
 window.searchTrees = searchTrees;
 window.clearSearch = clearSearch;
+
+function startCounter() {
+    let count = 0;
+    return function() {
+        count++;
+        console.log(count);
+    }
+}
+
+const counter = startCounter();
+
+counter();
+counter();

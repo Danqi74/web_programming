@@ -26,6 +26,8 @@
     top: 30vh;
     background-color: antiquewhite;
     border-radius: 10px;
+    background: url('/images/netreba.jpg') 0px 0px / 100% 100% no-repeat;
+    color: white;
     width: 30vw;
     height: 30vw;
 }
@@ -37,6 +39,11 @@
     padding: 10px;
     top: 32vh;
     left: 61vw;
+}
+
+#modal_edit h2{
+    position: relative;
+    bottom: 50px;
 }
 
 .edit_form{
