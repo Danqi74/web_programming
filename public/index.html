@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Lab_5</title>
+</head>
+<body>
+    <section class="search_and_sort">
+        <div class="search_container">
+            <input type="text" id="search" placeholder="Manufacturer">
+            <button id="search_btn">Search</button>
+            <button id="clear_btn">Clear</button>
+        </div>
+        <div class="sorting_container">
+            <label for="sort-select">Choose a sorting type:</label>
+
+            <select id="sort-select">
+                <option value="">--Please choose an option--</option>
+                <option value="price_asc">By price ascending</option>
+                <option value="price_desc">By price descending</option>
+                <option value="manufacturer">By manufacturer</option>
+                <option value="height">By height</option>
+                <option value="material">By material</option>
+            </select>
+        </div>
+    </section>
+
+    <section class="cards">
+        <ul id="cards_list">
+        </ul>
+        <p id="totalPrice"></p>
+    </section>
+
+    <section>
+        <div class="add_tree">
+            <h2>Adding Form</h2>
+            <input type="text" id="add_manufacturer" class="add_form" placeholder="Manufacturer">
+            <input type="number" id="add_price" class="add_form" placeholder="Price">
+            <input type="number" id="add_height" class="add_form" placeholder="Height">
+            <input type="text" id="add_material" class="add_form" placeholder="Material">
+            <button id="submit_add_btn">Submit</button>
+        </div>
+    </section>
+
+    <div id="modal_edit">
+        <h2>Edit Form</h2>
+        <p class="close_btn" id="close_edit_modal_btn">✖</p>
+        <input type="text" id="edit_manufacturer" class="edit_form" placeholder="Manufacturer">
+        <input type="number" id="edit_price" class="edit_form" placeholder="Price">
+        <input type="number" id="edit_height" class="edit_form" placeholder="Height">
+        <input type="text" id="edit_material" class="edit_form" placeholder="Material">
+        <button id="submit_edit_btn">Submit</button>
+    </div>
+    <script type="module" src="script.js"></script>
+</body>
+</html>

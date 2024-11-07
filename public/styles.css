@@ -1,0 +1,52 @@
+#cards_list{
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.item {
+    display: block;
+    border-width: 3px;
+    border-color: lightgray;
+    border-style: solid;
+    padding: 10px;
+    width: 200px;
+}
+
+#modal_edit{
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 1;
+    right: 35vw;
+    top: 30vh;
+    background-color: antiquewhite;
+    border-radius: 10px;
+    background: url('netreba.jpg') 0px 0px / 100% 100% no-repeat;
+    color: white;
+    width: 30vw;
+    height: 30vw;
+}
+
+.close_btn{
+    position: fixed;
+    font-size: 30px;
+    margin: 0;
+    padding: 10px;
+    top: 32vh;
+    left: 61vw;
+}
+
+#modal_edit h2{
+    position: relative;
+    bottom: 50px;
+}
+
+.edit_form{
+    margin-bottom: 10px;
+    width: 20vw;
+}
