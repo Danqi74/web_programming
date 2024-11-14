@@ -1,0 +1,60 @@
+
+.new_arrivals {
+    padding: 0px 90px 90px;
+    text-align: center;
+}
+
+.new_arrivals_title {
+    font-size: 2.5rem;
+    text-decoration: underline;
+    margin-bottom: 30px;
+}
+
+.pony_grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.pony_block {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    max-height: 580px;
+    transition: transform 0.3s;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 5px;
+}
+
+.pony_block:hover {
+    transform: scale(1.03);
+}
+
+.pony_image {
+    height: 200px ;
+    width: auto;
+}
+
+.pony_name {
+    padding: 5px;
+    font-size: 1.2rem;
+    color: blueviolet;
+}
+
+.pony_age {
+    padding: 5px;
+    font-size: 1rem;
+    color: #e74c3c;
+    font-weight: bold;
+}
+.pony_power {
+    padding: 5px;
+    font-size: 1rem;
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+h2 {
+    color: blueviolet;
+}

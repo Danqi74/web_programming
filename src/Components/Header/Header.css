@@ -1,0 +1,33 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 80px;
+    background: rgb(253, 196, 204);
+}
+
+.logo {
+    width: 100px; 
+    height: auto; 
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 50px;
+}
+
+nav ul li {
+    margin-right: 30px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: rgb(111, 36, 215);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    color: rgb(13, 101, 217);
+}

@@ -1,0 +1,41 @@
+.about {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    flex-direction: column;
+    height: auto;
+    min-height: 60vh;
+}
+
+
+.about_content {
+    display: flex;
+    flex-direction: row;
+    gap: 2vw;
+    align-items: center;
+    justify-content: center;
+}
+
+.about-description {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: white;
+    font-weight: bold;
+    width: 60vw;
+}
+
+.shop_title {
+    font-size: 1.4rem;
+    color: blueviolet;
+}
+
+.about_image_container {
+    width: 30vw;
+}
+
+.about_image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}

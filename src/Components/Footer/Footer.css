@@ -1,0 +1,14 @@
+.footer {
+    display: flex;
+    height: 14vh;
+    background: rgb(253, 196, 204);
+    color: white;
+    text-align: center;
+    justify-content: center;
+}
+
+.footer div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
