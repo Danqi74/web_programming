@@ -1,0 +1,50 @@
+.item_page{
+    display: flex;
+    height: 65vh;
+    padding: 0px 30px;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.item_image{
+    height: 45vh;
+    width: auto;
+}
+
+.price{
+    font-size: 2em;
+    font-weight: bold;
+    color: darkorchid;
+}
+
+.item_details{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    padding-top: 50px;
+    align-items: center;
+}
+
+.back_button {
+    display: inline-block;
+    background-color: white;
+    color: blueviolet;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+    margin-top: 15px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.back_button:hover {
+    background-color: plum;
+}
+
+.description{
+    width: 65%;
+    font-size: 1.15em;
+}

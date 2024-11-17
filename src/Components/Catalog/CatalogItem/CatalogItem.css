@@ -1,22 +1,22 @@
-
-.new_arrivals {
-    padding: 0px 90px 90px;
-    text-align: center;
+.catalog_view_more {
+    display: inline-block;
+    background-color: pink;
+    color: blueviolet;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
 }
 
-.new_arrivals_title {
-    font-size: 2.5rem;
-    text-decoration: underline;
-    margin-bottom: 30px;
+.catalog_view_more:hover {
+    background-color: plum;
 }
 
-.pony_grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-}
-
-.pony_block {
+.catalog_item {
     background-color: #fff;
     border-radius: 8px;
     overflow: hidden;
@@ -27,34 +27,30 @@
     padding: 5px;
 }
 
-.pony_block:hover {
+.catalog_item:hover {
     transform: scale(1.03);
 }
 
-.pony_image {
+.catalog_image {
     height: 200px ;
     width: auto;
 }
 
-.pony_name {
+.catalog_name {
     padding: 5px;
     font-size: 1.2rem;
     color: blueviolet;
 }
 
-.pony_age {
+.catalog_age {
     padding: 5px;
     font-size: 1rem;
     color: #e74c3c;
     font-weight: bold;
 }
-.pony_power {
+.catalog_power {
     padding: 5px;
     font-size: 1rem;
     color: #e74c3c;
     font-weight: bold;
-}
-
-h2 {
-    color: blueviolet;
 }

@@ -2,7 +2,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 80px;
+    padding: 0px 80px;
+    height: 20vh;
     background: rgb(253, 196, 204);
 }
 
