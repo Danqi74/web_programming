@@ -13,7 +13,7 @@ function Feedback(){
                 <p class="client_name">Юрась Пристай</p>
                 </div>
             </div>
-            <div class="client"><p class="client_text">До мне прийшов клієнт і сказав шо мʼясо говорить. Я відправив його в дурку</p>
+            <div class="client"><p class="client_text">До мене прийшов клієнт і сказав шо мʼясо говорить. Я відправив його в дурку</p>
                 <div class="client_info">
                 <p class="client_name">Невідомий студент психологічного</p>
                 </div>
