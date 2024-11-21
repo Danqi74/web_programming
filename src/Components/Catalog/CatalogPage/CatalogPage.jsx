@@ -1,60 +1,83 @@
 import './CatalogPage.css'
-import { allMeat } from '../../../allMeat/allMeat';
-import React, { useContext, useState } from 'react';
+// import { allMeat } from '../../../allMeat/allMeat';
+import React, { useState, useEffect } from 'react';
+import { fetchItems } from '../../../server/api';
 import CatalogItem from '../../Catalog/CatalogItem/CatalogItem';
 import InputComponent from '../InputComponent/InputComponent';
 import SelectComponent from '../SelectComponent/SelectComponent';
+import Loader from '../../Loader/Loader.jsx';
 
 
 const CatalogPage = function() {
-    const { items } = useContext(allMeat);
+    // const { items } = useContext(allMeat);
+    const [items, setItems] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedFilter, setSelectedFilter] = useState('');
     const [selectedSortType, setSelectedSortType] = useState('');
+    const [loading, setLoading] = useState(true);
 
-    const filteredItems = items.filter(item => {
-        const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase().trim());
-        let matchesFilter;
-        switch (selectedFilter){
-            case 'price_low':
-                matchesFilter = item.price < 150 ? true : false;
-                break;
-            case 'price_high':
-                matchesFilter = item.price >= 150 ? true : false;
-                break;
-            case 'age_high':
-                matchesFilter = item.age >= 100 ? true : false;
-                break;
-            case 'age_low':
-                matchesFilter = item.age < 100 ? true : false;
-                break;
-            default: matchesFilter = true;
+    const fetchData = async () => {
+        setLoading(true); // Indicate loading starts
+        try {
+            const response = await fetchItems(searchTerm, selectedSortType, selectedFilter);
+            setItems(response.data); // Update the items state with fetched data
+        } catch (error) {
+            console.error("Error fetching items:", error); // Handle errors gracefully
+        } finally {
+            setLoading(false); // Ensure loading stops, regardless of success or failure
         }
-        return matchesSearch && matchesFilter
-    });
+    };
+    
 
-    const sortedItems = [...filteredItems];
+    useEffect(() => {
+        fetchData();
+    }, [searchTerm, selectedSortType, selectedFilter]); 
 
-    switch (selectedSortType) {
-        case "age":
-            sortedItems.sort((a, b) => b.age - a.age);
-            break;
-        case "price_asc":
-            sortedItems.sort((a, b) => a.price - b.price);
-            break;
-        case "price_desc":
-            sortedItems.sort((a, b) => b.price - a.price);
-            break;
-        default:
-    }
+
+
+    // const filteredItems = items.filter(item => {
+    //     const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase().trim());
+    //     let matchesFilter;
+    //     switch (selectedFilter){
+    //         case 'price_low':
+    //             matchesFilter = item.price < 150 ? true : false;
+    //             break;
+    //         case 'price_high':
+    //             matchesFilter = item.price >= 150 ? true : false;
+    //             break;
+    //         case 'age_high':
+    //             matchesFilter = item.age >= 100 ? true : false;
+    //             break;
+    //         case 'age_low':
+    //             matchesFilter = item.age < 100 ? true : false;
+    //             break;
+    //         default: matchesFilter = true;
+    //     }
+    //     return matchesSearch && matchesFilter
+    // });
+
+    // const sortedItems = [...filteredItems];
+
+    // switch (selectedSortType) {
+    //     case "age":
+    //         sortedItems.sort((a, b) => b.age - a.age);
+    //         break;
+    //     case "price_asc":
+    //         sortedItems.sort((a, b) => a.price - b.price);
+    //         break;
+    //     case "price_desc":
+    //         sortedItems.sort((a, b) => b.price - a.price);
+    //         break;
+    //     default:
+    // }
 
     const handleSearchChange = (e) => setSearchTerm(e.target.value);
     const handleFilterChange = (e) => setSelectedFilter(e.target.value);
     const handleSortChange = (e) => setSelectedSortType(e.target.value);
     return(
         <div className="catalog_page_container">
-            <div class="search_and_sort">
-                <div class="search_container">
+            <div className="search_and_sort">
+                <div className="search_container">
                     <InputComponent
                         value={searchTerm}
                         onChange={handleSearchChange}
@@ -62,8 +85,8 @@ const CatalogPage = function() {
                         className="search-bar"
                     />
                 </div>
-                <div class="sorting_container">
-                    <label for="sort-select">Обери тип сортування:</label>
+                <div className="sorting_container">
+                    <label htmlFor="sort-select">Обери тип сортування:</label>
                     <SelectComponent
                         value={selectedSortType}
                         onChange={handleSortChange}
@@ -76,8 +99,8 @@ const CatalogPage = function() {
                         ]}
                     />
                 </div>
-                <div class="filter_container">
-                    <label for="filter-select">Треба щось конретне? Ось фільтри:</label>
+                <div className="filter_container">
+                    <label htmlFor="filter-select">Треба щось конретне? Ось фільтри:</label>
 
                     <SelectComponent
                         value={selectedFilter}
@@ -93,10 +116,13 @@ const CatalogPage = function() {
                     />
                 </div>
             </div>
-
-            <div className='items_container'>
-                {sortedItems.map((item) => ( 
-                    <CatalogItem
+            {loading ? (
+                <Loader />
+            ) : (
+                <div className="items_container">
+                {items.length > 0 ? (
+                    items.map((item) => (
+                        <CatalogItem
                         key={item.id}
                         id={item.id}
                         name={item.name}
@@ -105,8 +131,12 @@ const CatalogPage = function() {
                         power={item.power}
                         image={item.image}
                     />
-                ))}
-            </div>
+                    ))
+                ) : (
+                    <p>No items match your search!</p>
+                )}
+                </div>
+            )}
         </div>
     )
 };

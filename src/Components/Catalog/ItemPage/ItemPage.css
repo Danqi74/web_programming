@@ -21,12 +21,19 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    gap: 50px;
-    padding-top: 50px;
+    padding: 50px 0px;
     align-items: center;
+    justify-content: space-around;
 }
 
-.back_button {
+.button_container{
+    display: flex;
+    flex-direction: row;
+    gap: 3vw;
+}
+
+.back_button,
+.add_cart_button {
     display: inline-block;
     background-color: white;
     color: blueviolet;
@@ -40,11 +47,57 @@
     transition: background-color 0.3s ease;
 }
 
-.back_button:hover {
+.back_button:hover,
+.add_cart_button:hover {
     background-color: plum;
 }
 
 .description{
     width: 65%;
     font-size: 1.15em;
+}
+
+.type_label,
+.count_label {
+    font-size: 14px;
+    color: #555;
+    font-weight: 500;
+}
+
+.type_select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.count_select {
+    padding: 10px;
+    width: 100px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.count_select:focus,
+.type_select:hover {
+    border-color: #007BFF;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.4);
+    outline: none;
+}
+
+.select_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center; /* або center для центрованого вигляду */
+    gap: 15px; /* Простір між елементами */
+    background-color: #f8d7da; /* Ніжно-рожевий фон */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тінь для елементів */
+    width: fit-content; /* Автоматичний розмір */
+    margin: 20px auto; /* Центрування контейнера */
 }

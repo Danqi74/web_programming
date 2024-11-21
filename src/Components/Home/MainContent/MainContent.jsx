@@ -1,17 +1,39 @@
 import './MainContent.css';
-import React, { useContext, useState } from 'react';
-import { allMeat } from '../../../allMeat/allMeat';
+import React, { useState, useEffect} from 'react';
+import { fetchItems } from '../../../server/api';
+import Loader from '../../Loader/Loader.jsx';
+// import { allMeat } from '../../../allMeat/allMeat';
 import CatalogItem from '../../Catalog/CatalogItem/CatalogItem';
 import ViewMoreButton from '../ViewMoreButton/ViewMoreButton';
 
 const MainContent = () => {
-    const { items } = useContext(allMeat);
+    // const { items } = useContext(allMeat);
+    const [items, setItems] = useState([]);
     const [visibleItems, setVisibleItems] = useState(6);
+
+    const [loading, setLoading] = useState(true);
+
+    const fetchData = async () => {
+        setLoading(true); // Indicate loading starts
+        try {
+            const response = await fetchItems();
+            setItems(response.data); // Update the items state with fetched data
+        } catch (error) {
+            console.error("Error fetching items:", error); // Handle errors gracefully
+        } finally {
+            setLoading(false); // Ensure loading stops, regardless of success or failure
+        }
+    };
+    
+
+    useEffect(() => {
+        fetchData();
+    }, []); 
 
     const handleViewMore = () => {
         setVisibleItems(prevVisibleItems => prevVisibleItems + 6); 
     };
-
+    if (loading) return <Loader></Loader>;
     return (
         <section className="new_arrivals">
             <h2 className="new_arrivals_title">Виживші</h2>
