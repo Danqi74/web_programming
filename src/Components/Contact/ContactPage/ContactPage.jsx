@@ -3,7 +3,7 @@ import './ContactPage.css';
 const ContactPage = function() {
 return (
     <div className="contact_page">
-        Contact us
+        Не треба тобі з нами звʼязуватись, повір, воно того не варте)
     </div>
 );
 };

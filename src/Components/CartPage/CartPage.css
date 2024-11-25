@@ -1,0 +1,213 @@
+.cart_page{
+    min-height: 65vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cart-items {
+    display: flex;
+    flex-direction: column; /* Stack the items vertically */
+    gap: 20px;  /* Space between items */
+    margin-bottom: 30px;
+}
+
+/* Cart Item */
+.cart-item {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 15px;
+    width: 80vw;
+    transition: transform 0.3s ease;
+}
+
+.cart-item:hover {
+    transform: translateY(-2px);
+}
+
+.cart-item-image {
+    width: auto;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 20px;
+}
+
+/* Cart Item Details */
+.cart-item-details {
+    width: 100%;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart-item-name {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #555;
+}
+
+.cart-item-size,
+.cart-item-price {
+    font-size: 1rem;
+    color: #777;
+    margin-top: 5px;
+}
+
+.cart-item-quantity p{
+    margin-right: 10px;
+}
+
+.cart-item-quantity {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 7px;
+}
+
+.quantity-button {
+    background-color: #e1e1e1;
+    border: none;
+    padding: 5px 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+    margin: 0 3px;
+}
+
+.quantity-button:hover {
+    background-color: #ccc;
+}
+
+.cart-item-total {
+    margin-top: 15px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Cart Buttons Container */
+.cart-buttons-container {
+    display: flex;
+    gap: 30px;
+    justify-content: end;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.remove-button,
+.open-button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.remove-button:hover {
+    background-color: #ff1a1a;
+}
+
+.open-button {
+    background-color: #cb78e2;
+}
+
+.open-button:hover {
+    background-color: #c66adf;
+}
+
+/* Cart Summary */
+.cart-summary {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+    width: 40vw;
+}
+
+.cart-summary h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.cart-summary p {
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+.clear-cart-button {
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.clear-cart-button:hover {
+background-color: #e67e22;
+}
+
+/* Empty Cart Message */
+.empty-cart-message {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #555;
+    margin-top: 50px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    line-height: 1.5;
+    animation: fadeIn 1s ease-out; /* Optional animation for a smooth fade-in effect */
+}
+
+/* Back Button */
+.back-button {
+    display: block;
+    width: 200px;
+    margin: 90px auto 50px;
+    background-color: #cb78e2;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+    .back-button:hover {
+    background-color: #c66adf;
+    transform: scale(1.05); /* Slightly grow the button on hover */
+}
+
+.back-button:active {
+    transform: scale(1); /*     licked */
+}
+
+/* Animation for the Empty Cart Message */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -10,6 +10,7 @@ import Footer from './Components/Footer/Footer';
 import ItemPage from './Components/Catalog/ItemPage/ItemPage';
 import CatalogPage from './Components/Catalog/CatalogPage/CatalogPage';
 import ContactPage from './Components/Contact/ContactPage/ContactPage';
+import CartPage from './Components/CartPage/CartPage';
 
 function App() {
   return (
@@ -30,7 +31,8 @@ function App() {
           />
           <Route path="/catalog" element={<CatalogPage/>} />
           <Route path="/contact" element={<ContactPage/>} />
-          <Route path="item/:id" element={<ItemPage/>} />
+          <Route path="/item/:id" element={<ItemPage/>} />
+          <Route path="/cart" element={<CartPage/>} />
         </Routes>
 
       </ItemsProvider>

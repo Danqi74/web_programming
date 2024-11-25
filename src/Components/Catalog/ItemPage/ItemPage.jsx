@@ -4,7 +4,10 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { fetchItemById } from '../../../server/api';
 import Loader from '../../Loader/Loader.jsx';
 import SelectComponent from '../SelectComponent/SelectComponent';
+import { useDispatch } from 'react-redux'; 
+import { addToCart } from '../../../redux/cartAction'; 
 import './ItemPage.css';
+
 
 const ItemPage = () => {
     const { id } = useParams();
@@ -13,9 +16,10 @@ const ItemPage = () => {
 
     const [item, setItem] = useState(null); // State for a single item
     const [loading, setLoading] = useState(true);
-    const [quantity, setQuantity] = useState(1);
+    const [count, setCount] = useState(1);
     const [totalPrice, setTotalPrice] = useState();
-    const [meatType, setMeatType] = useState("");
+    const [meatType, setMeatType] = useState("alive");
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const loadItem = async () => {
@@ -32,12 +36,24 @@ const ItemPage = () => {
         loadItem();
     }, [id]);
 
+    const handleAddToCart = () => {
+    
+        if (!meatType) {
+        alert('Please select size and type');
+        return;
+    };
+    
+        const itemWithCount = { ...item, meatType, count };
+        dispatch(addToCart(itemWithCount));
+        navigate('/cart');
+    };
+
     if (loading) return <Loader/>;
     if (!item) return <p>Item not found</p>;
 
-    const handleQuantityChange = (e) => {
+    const handleCountChange = (e) => {
         const value = Math.max(1, parseInt(e.target.value) || 1);
-        setQuantity(value);
+        setCount(value);
         setTotalPrice(item.price * value);
     };
     const handleMeatTypeChange = (e) => { setMeatType(e.target.value)};
@@ -58,8 +74,8 @@ const ItemPage = () => {
                     <input 
                         className='count_select'
                         type="number" 
-                        value={quantity} 
-                        onChange={handleQuantityChange} 
+                        value={count} 
+                        onChange={handleCountChange} 
                         min="1" 
                     />
                     <label htmlFor="type_select" className='type_label'>Обери тип мʼяска:</label>
@@ -77,7 +93,7 @@ const ItemPage = () => {
                 </div>
                 <div className="button_container">
                     <button className="back_button" onClick={() => navigate(-1)}>Втекти звідси</button>
-                    <button className='add_cart_button'>Добавити в кошик!!!</button>
+                    <button className='add_cart_button' onClick={handleAddToCart}>Добавити в кошик!!!</button>
                 </div>
             </div>
         </div>
