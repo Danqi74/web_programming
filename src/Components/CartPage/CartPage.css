@@ -146,7 +146,8 @@
     margin-top: 10px;
 }
 
-.clear-cart-button {
+.clear-cart-button,
+.buy-button {
     background-color: #f39c12;
     color: white;
     border: none;
@@ -159,9 +160,16 @@
 }
 
 .clear-cart-button:hover {
-background-color: #e67e22;
+    background-color: #e67e22;
 }
 
+.buy-button {
+    background-color: #cb78e2;
+    padding: 15px 20px;
+}
+.buy-button:hover {
+    background-color: #c66adf;
+}
 /* Empty Cart Message */
 .empty-cart-message {
     text-align: center;
@@ -210,4 +218,10 @@ background-color: #e67e22;
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+.cart-summary-button-container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }

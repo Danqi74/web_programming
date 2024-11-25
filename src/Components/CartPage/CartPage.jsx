@@ -113,9 +113,15 @@ const CartPage = () => {
                     <div className="cart-summary">
                         <h3>Підсумок</h3>
                         <p>Ваше замовлення обійдеться всього в ${getTotalPrice()}</p>
-                        <button className="clear-cart-button" onClick={handleClearCart}>
-                            Ну нафіг ту магію, очистити кошик!
-                        </button>
+                        <div className='cart-summary-button-container'>
+                            <button className="buy-button" onClick={() => navigate("/purchase")}>
+                                Заберіть мої гроші, я хочу мʼяса!
+                            </button>
+
+                            <button className="clear-cart-button" onClick={handleClearCart}>
+                                Ну нафіг ту магію, очистити кошик!
+                            </button>
+                        </div>
                     </div>
                 </>
             )}
