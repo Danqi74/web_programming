@@ -28,7 +28,8 @@ const PurchaseValidationPage = () => {
         height: "",
         VAT: "",
         card_cvv: "",
-    };
+        email: "",
+        };
 
     const validationSchema = Yup.object({
         name: Yup.string()
@@ -41,7 +42,7 @@ const PurchaseValidationPage = () => {
         .matches(/^(?:\d[+-]|[A-B]{1,2}[+-]|[O][+-])$/, "Введи тип крові в форматі цифра від 1 до 4 та знак + або -, або латинські літери і знак, наприклад 2-, 4+, AB-, O+"),
         height: Yup.number()
         .required("Я хочу знати твій ріст, спитаєш 'для чого?', та просто так.")
-        .min(149, "Я не продам магічне мʼясо коли ти навіть не мтер 50 з кепкою")
+        .min(149, "Я не продам магічне мʼясо коли ти навіть не метр 50 з кепкою")
         .max(250,"Твій ріст більше 2 з половиною метрів? Не бреши тут..."),
         VAT: Yup.string()
         .required("ІПН обовʼязковий, інакше я тобі мʼясо не продам")
@@ -51,6 +52,9 @@ const PurchaseValidationPage = () => {
         .min(100, "Треба 3 циферки!")
         .max(999,"3 циферки, не більше!!!")
         .required("Не будь жлобом, дай 3 циферки, решту я вже й так маю)"),
+        email :Yup.string()
+        .email("Введіть правильну е-пошту")
+        .matches(/\.[a-z]{2,}$/, "Після крапки має бути 2 символи!")
     });
 
     const handleSubmit = (values) => {
@@ -140,6 +144,21 @@ const PurchaseValidationPage = () => {
                     />
                     <ErrorMessage
                         name="card_cvv"
+                        component="div"
+                        className="error-message"
+                    />
+                </div>
+
+                <div className="form-group">
+                    <label htmlFor="email">Е-пошта:</label>
+                    <Field
+                        type="email"
+                        id="email"
+                        name="email"
+                        className="form-input"
+                    />
+                    <ErrorMessage
+                        name="email"
                         component="div"
                         className="error-message"
                     />
