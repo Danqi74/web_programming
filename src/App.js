@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import {React} from 'react';
 // import { ItemsProvider } from './allMeat/allMeat';
 import { Route, Routes } from 'react-router-dom';
 import Header from './Components/Header/Header';
@@ -13,37 +13,47 @@ import ContactPage from './Components/Contact/ContactPage/ContactPage';
 import CartPage from './Components/CartPage/CartPage';
 import PurchaseValidationPage from './Components/Purchase/PurchaseValidationPage/PurchaseValidationPage';
 import SuccessPage from './Components/Purchase/SuccessPage/SuccessPage';
+import LoginPage from './Components/Login/LoginPage/LoginPage';
+import RegisterPage from './Components/Login/RegisterPage/RegisterPage';
+import { PrivateRoute } from './route/private';
 
 function App() {
+  const add_header_and_footer = (element) =>{
+    return(
+      <>
+        <Header/>
+        {element}
+        <Footer/>
+      </>
+    )
+  };
   return (
     <div className="App">
       {/* <ItemsProvider> */}
-        <Header />
-
         <Routes>
+          <Route path='/login' element={<LoginPage/>}/>
+          <Route path='/register' element={<RegisterPage/>}/>
           <Route
             path="/"
-            element={
+            element={<PrivateRoute
+              component={add_header_and_footer(
               <>
                 <Title />
                 <MainContent />
                 <Feedback />
               </>
-            }
+            )}/>}
           />
-          <Route path="/catalog" element={<CatalogPage/>} />
-          <Route path="/contact" element={<ContactPage/>} />
-          <Route path="/item/:id" element={<ItemPage/>} />
-          <Route path="/cart" element={<CartPage/>} />
-          <Route path="/purchase" element={<PurchaseValidationPage/>} />
-          <Route path="/success" element={<SuccessPage/>} />
+          <Route path="/catalog" element={<PrivateRoute component={add_header_and_footer(<CatalogPage/>)}/>} />
+          <Route path="/contact" element={<PrivateRoute component={add_header_and_footer(<ContactPage/>)}/>} />
+          <Route path="/item/:id" element={<PrivateRoute component={add_header_and_footer(<ItemPage/>)}/>} />
+          <Route path="/cart" element={<PrivateRoute component={add_header_and_footer(<CartPage/>)}/>} />
+          <Route path="/purchase" element={<PrivateRoute component={add_header_and_footer(<PurchaseValidationPage/>)}/>} />
+          <Route path="/success" element={<PrivateRoute component={add_header_and_footer(<SuccessPage/>)}/>} />
         </Routes>
-
       {/* </ItemsProvider> */}
-      <Footer />
     </div>
   );
 }
-
 
 export default App;

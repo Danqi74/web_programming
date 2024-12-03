@@ -1,79 +1,96 @@
 import { ADD_TO_CART, CLEAR_CART, REMOVE_FROM_CART, SET_CART, UPDATE_CART_ITEM_COUNT } from "./cartActionTypes";
 
-// Function to save cart items to local storage
-const saveCartToLocalStorage = (cartItems) => {
-    localStorage.setItem('cart', JSON.stringify(cartItems));
-};
-
-// Initial state for the cart
 const initialState = {
-    cartItems: JSON.parse(localStorage.getItem('cart')) || [], // Load cart from localStorage if available
+    cartItems: {},
 };
 
-// Cart reducer
 const cartReducer = (state = initialState, action) => {
+    const userEmail = localStorage.getItem('email');
+    if (!userEmail) {
+        return state;
+    }
+
     switch (action.type) {
-        case ADD_TO_CART:
-            // Check if the item already exists in the cart
-            const existingItem = state.cartItems.find(item => item.id === action.payload.id && item.meatType === action.payload.meatType);
+        case ADD_TO_CART: {
+            const existingCart = state.cartItems[userEmail] || [];
+            const existingItemIndex = existingCart.findIndex(
+                (item) =>
+                    item.id === action.payload.id &&
+                    item.meatType === action.payload.meatType
+            );
+
             let updatedCartItems;
-            if (existingItem) {
-                // If it exists, update the item count
-                updatedCartItems = state.cartItems.map(item =>
-                    item.id === action.payload.id && item.meatType === action.payload.meatType
-                        ? { ...item, count: item.count + action.payload.count }
-                        : item
-                );
+            if (existingItemIndex >= 0) {
+                updatedCartItems = [...existingCart];
+                updatedCartItems[existingItemIndex] = {
+                    ...updatedCartItems[existingItemIndex],
+                    count: updatedCartItems[existingItemIndex].count + action.payload.count,
+                };
             } else {
-                // If it's a new item, add it to the cart
-                updatedCartItems = [...state.cartItems, action.payload];
+                updatedCartItems = [...existingCart, action.payload];
             }
 
-            // Save the updated cart to localStorage
-            saveCartToLocalStorage(updatedCartItems);
             return {
                 ...state,
-                cartItems: updatedCartItems,
+                cartItems: {
+                    ...state.cartItems,
+                    [userEmail]: updatedCartItems,
+                },
             };
+        }
 
-        case UPDATE_CART_ITEM_COUNT:
-            const updatedCountCartItems = state.cartItems.map((item) => {
-                if (item.id === action.payload.id && item.meatType === action.payload.meatType) {
-                    return { ...item, count: action.payload.newCount }
-                } else return item
-                });
+        case UPDATE_CART_ITEM_COUNT: {
+            const existingCart = state.cartItems[userEmail] || [];
+            const updatedCartItems = existingCart.map((item) =>
+                item.id === action.payload.id && item.meatType === action.payload.meatType
+                    ? { ...item, count: action.payload.newCount }
+                    : item
+            );
 
-            // Save the updated cart to localStorage
-            saveCartToLocalStorage(updatedCountCartItems);
             return {
                 ...state,
-                cartItems: updatedCountCartItems,
+                cartItems: {
+                    ...state.cartItems,
+                    [userEmail]: updatedCartItems,
+                },
             };
+        }
 
-        case REMOVE_FROM_CART:
-            const filteredCartItems = state.cartItems.filter(item => item.id !== action.payload.id || item.meatType !== action.payload.meatType);
+        case REMOVE_FROM_CART: {
+            const existingCart = state.cartItems[userEmail] || [];
+            const updatedCartItems = existingCart.filter(
+                (item) =>
+                    item.id !== action.payload.id || item.meatType !== action.payload.meatType
+            );
 
-            // Save the updated cart to localStorage
-            saveCartToLocalStorage(filteredCartItems);
             return {
                 ...state,
-                cartItems: filteredCartItems,
+                cartItems: {
+                    ...state.cartItems,
+                    [userEmail]: updatedCartItems,
+                },
             };
+        }
 
         case CLEAR_CART:
-            // Clear the cart and save it to localStorage
-            saveCartToLocalStorage([]);
             return {
                 ...state,
-                cartItems: [],
+                cartItems: {
+                    ...state.cartItems,
+                    [userEmail]: [],
+                },
             };
 
         case SET_CART:
-            // Set the cart to a new value and save it to localStorage
-            saveCartToLocalStorage(action.payload);
+            if (!action.payload) {
+                return state;
+            }
             return {
                 ...state,
-                cartItems: action.payload,
+                cartItems: {
+                    ...state.cartItems,
+                    [userEmail]: action.payload,
+                },
             };
 
         default:

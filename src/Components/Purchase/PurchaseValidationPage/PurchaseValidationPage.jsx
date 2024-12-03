@@ -8,19 +8,22 @@ import { loadCartFromLocalStorage, clearCart} from '../../../redux/cartAction';
 import './PurchaseValidationPage.css'; // Import the CSS file
 
 const PurchaseValidationPage = () => {
-    const cartItems = useSelector((state) => state.cart.cartItems);
+    const cartItems = useSelector((state) => {
+        const userEmail = localStorage.getItem('email');
+        return state.cart.cartItems[userEmail] || [];
+    });
+    
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
+    
     useEffect(() => {
         dispatch(loadCartFromLocalStorage());
     }, [dispatch]);
-
-    const totalSum = () =>{
-        return cartItems.reduce((total, item) => {
-            return total + item.price * item.count;
-        }, 0);
+    
+    const totalSum = () => {
+        return cartItems.reduce((total, item) => total + item.price * item.count, 0);
     };
+    
 
     const initialValues = {
         name: "",

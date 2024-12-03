@@ -1,0 +1,76 @@
+.auth-container-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(to bottom right, pink, lavender, skyblue);
+    padding: 20px;
+}
+
+.auth-container {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    color: blueviolet;
+}
+
+.auth-container h2 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: rebeccapurple;
+}
+
+.auth-container .error {
+    color: #e74c3c;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.auth-container input {
+    width: 90%;
+    padding: 10px 15px;
+    margin: 10px 0;
+    border: 2px solid lightpink;
+    border-radius: 25px;
+    font-size: 14px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auth-container input:focus {
+    border-color: mediumorchid;
+    box-shadow: 0 0 5px mediumorchid;
+    outline: none;
+}
+
+.auth-container button {
+    display: inline-block;
+    background-color: mediumorchid;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.auth-container button:hover {
+    background-color: rebeccapurple;
+    transform: scale(1.05);
+}
+
+.auth-container .switch-link {
+    color: mediumorchid;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.auth-container .switch-link:hover {
+    color: rebeccapurple;
+}

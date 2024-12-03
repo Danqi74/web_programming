@@ -6,7 +6,10 @@ import { removeFromCart, clearCart,updateCartItemCount, loadCartFromLocalStorage
 import './CartPage.css';
 
 const CartPage = () => {
-    const cartItems = useSelector((state) => state.cart.cartItems);
+    const cartItems = useSelector((state) => {
+        const userEmail = localStorage.getItem('email');
+        return state.cart.cartItems[userEmail] || [];
+    });
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -15,26 +18,26 @@ const CartPage = () => {
     }, [dispatch]);
 
     const handleRemove = (id, meatType) => {
-        dispatch(removeFromCart(id, meatType));
+        dispatch(removeFromCart({ id, meatType }));
     };
 
     const handleUpdateCount = (id, meatType, newCount) => {
         console.log('Updating count for:', { id, meatType, newCount });
         if (newCount > 0) {
-            dispatch(updateCartItemCount(id ,meatType, newCount));
+            dispatch(updateCartItemCount({ id, meatType, newCount }));
         } else {
-            handleRemove(id, meatType); 
+            handleRemove(id, meatType);
         }
     };
+    
 
     const handleClearCart = () => {
         dispatch(clearCart());
     };
 
     const getTotalPrice = () => {
-        return cartItems.reduce((total, item) => {
-            return total + item.price * item.count;
-        }, 0);
+        const total = cartItems.reduce((sum, item) => sum + item.price * item.count, 0);
+        return total
     };
 
     const ReadableMeatType = (meatType) => {

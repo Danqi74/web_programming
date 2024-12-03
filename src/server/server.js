@@ -2,6 +2,9 @@ const express = require('express')
 const cors = require('cors')
 const app = express()
 const PORT = process.env.PORT || 9000;
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const VERY_SECRET_KEY = 'He he he 123';
 
 app.use(cors());
 app.use(express.json());
@@ -9,7 +12,7 @@ app.use(express.json());
 const path = require('path')
 app.use('/static', express.static(path.join(__dirname,'public')))
 
-
+let users = []
 let meat = [
     {
         id: 1,
@@ -94,6 +97,87 @@ let meat = [
     }
 ]
 
+app.post('/signin', async (req, res) => {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+        return res.status(400).json({ message: 'All fields must be filled' });
+    }
+
+    const user = users.find(user => user.email === email);
+    if (!user) {
+        return res.status(400).json({ message: 'User with this email not defined' });
+    }
+
+    console.log(`${email} is trying to sign in`);
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+        return res.status(400).json({ message: 'Incorrect password' });
+    }
+
+    const token = jwt.sign(
+        {
+            userId: user.id,
+            email: user.email
+        },
+        VERY_SECRET_KEY,
+        { expiresIn: '24h' }
+    );
+
+    console.log(`Token for user ${email}: ${token}`);
+
+    res.json({
+        message: 'You signed in',
+        token,
+        user: {
+            username: user.username,
+            email: user.email
+        }
+    });
+});
+
+app.post('/signup', async (req, res) => {
+    const { username, password, email } = req.body;
+
+    if (!username || !password || !email) {
+        return res.status(400).json({ message: 'All fields must be filled' });
+    }
+
+    const existingUser = users.find(user => user.email === email);
+    if (existingUser) {
+        return res.status(400).json({ message: 'User with this email not defined' });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newUser = { username, password: hashedPassword, email };
+    users.push(newUser);
+
+    res.status(201).json({
+        message: 'User successfully registered',
+        user: { username, email },
+    });
+});
+
+const authenticateToken = (req, res, next) => {
+    const token = req.header('Authorization')?.split(' ')[1];
+
+    if (!token) return res.status(401).json({ message: 'Token undefined' });
+
+    jwt.verify(token, VERY_SECRET_KEY, (err, user) => {
+        if (err) {
+            return res.status(403).json({ message: 'Incorrect token' });
+        }
+        req.user = user;
+        next();
+    });
+};
+
+app.get('/api/protected', authenticateToken, (req, res) => {
+    console.log("Access is allowed", req.user.userId);
+    res.json({ message: "You can't do this before login. Login first." });
+});
 
 app.get('/api/meat', (req, res) => {
     const { search, sort, filter } = req.query;
